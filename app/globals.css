@@ -161,3 +161,124 @@
     @apply bg-background text-foreground;
   }
 }
+
+.print-sheet {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 15mm 18mm;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .print-sheet,
+  .print-sheet * {
+    visibility: visible !important;
+  }
+
+  .print-sheet {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    min-height: calc(297mm - 32mm);
+    flex-direction: column;
+    color: #183b37;
+    background: white;
+    font-family: Arial, sans-serif;
+  }
+
+  .print-header {
+    border-bottom: 2px solid #1a8060;
+    padding-bottom: 8mm;
+  }
+
+  .print-header img {
+    display: block;
+    width: 100%;
+    max-height: 46mm;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .print-meta,
+  .print-patient,
+  .print-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12mm;
+  }
+
+  .print-meta {
+    margin-top: 5mm;
+    color: #52736a;
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .print-patient {
+    margin-top: 10mm;
+    border: 1px solid #d8e6df;
+    padding: 5mm;
+  }
+
+  .print-patient div {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+
+  .print-patient strong,
+  .print-content h2 {
+    color: #167a5b;
+  }
+
+  .print-content {
+    flex: 1;
+    padding-top: 10mm;
+  }
+
+  .print-content h2 {
+    margin: 0 0 4mm;
+    border-bottom: 1px solid #d8e6df;
+    padding-bottom: 2mm;
+    font-size: 14pt;
+  }
+
+  .print-content ul {
+    margin: 0 0 10mm;
+    padding-left: 7mm;
+  }
+
+  .print-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+  }
+
+  .print-content th,
+  .print-content td {
+    border: 1px solid #d8e6df;
+    padding: 3.5mm;
+    text-align: left;
+  }
+
+  .print-content th {
+    background: #eff8f4;
+    font-weight: 700;
+  }
+
+  .print-footer {
+    border-top: 2px solid #1a8060;
+    padding-top: 5mm;
+    color: #52736a;
+    font-size: 10pt;
+    font-weight: 700;
+  }
+}
