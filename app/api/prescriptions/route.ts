@@ -11,12 +11,14 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const body = await request.json()
-  if (!body.patientId || !body.diagnosis?.trim() || !body.medicine?.trim()) return NextResponse.json({ error: 'Patient, diagnosis, and medicine are required' }, { status: 400 })
+  const diagnoses = Array.isArray(body.diagnoses) ? body.diagnoses.map((item: unknown) => String(item).trim()).filter(Boolean) : (body.diagnosis?.trim() ? [body.diagnosis.trim()] : [])
+  const medicines = Array.isArray(body.medicines) ? body.medicines.filter((item: { name?: string }) => item?.name?.trim()) : (body.medicine?.trim() ? [{ name: body.medicine.trim(), dosage: body.dosage, duration: body.duration, frequency: body.frequency }] : [])
+  if (!body.patientId || !diagnoses.length || !medicines.length) return NextResponse.json({ error: 'Patient, diagnosis, and medicine are required' }, { status: 400 })
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
-    const prescription = await client.query(`INSERT INTO prescriptions (user_id, patient_id, diagnosis, instructions) VALUES ($1, $2, $3, $4) RETURNING *`, [doctorId, body.patientId, body.diagnosis.trim(), body.instructions || null])
-    await client.query(`INSERT INTO prescription_medicines (prescription_id, medicine_name, dosage, duration, frequency) VALUES ($1, $2, $3, $4, $5)`, [prescription.rows[0].id, body.medicine.trim(), body.dosage || null, body.duration || null, body.frequency || null])
+    const prescription = await client.query(`INSERT INTO prescriptions (user_id, patient_id, diagnosis, instructions) VALUES ($1, $2, $3, $4) RETURNING *`, [doctorId, body.patientId, diagnoses.join(', '), body.instructions || null])
+    for (const item of medicines) await client.query(`INSERT INTO prescription_medicines (prescription_id, medicine_name, dosage, duration, frequency) VALUES ($1, $2, $3, $4, $5)`, [prescription.rows[0].id, item.name.trim(), item.dosage || null, item.duration || null, item.frequency || null])
     await client.query('COMMIT')
     return NextResponse.json(prescription.rows[0], { status: 201 })
   } catch (error) {
