@@ -185,7 +185,10 @@
     display: flex;
     position: absolute;
     inset: 0;
-    min-height: calc(297mm - 32mm);
+    min-height: 297mm;
+    width: 210mm;
+    box-sizing: border-box;
+    padding: 8mm 10mm 7mm;
     flex-direction: column;
     color: #183b37;
     background: white;
@@ -194,7 +197,7 @@
 
   .print-header {
     border-bottom: 2px solid #1a8060;
-    padding-bottom: 8mm;
+    padding-bottom: 4mm;
   }
 
   .print-doctor-heading {
@@ -274,9 +277,9 @@
   }
 
   .print-patient {
-    margin-top: 10mm;
+    margin-top: 5mm;
     border: 1px solid #d8e6df;
-    padding: 5mm;
+    padding: 3mm 4mm;
   }
 
   .print-patient div {
@@ -292,11 +295,11 @@
 
   .print-content {
     flex: 1;
-    padding-top: 10mm;
+    padding-top: 5mm;
   }
 
   .print-content h2 {
-    margin: 0 0 4mm;
+    margin: 0 0 2mm;
     border-bottom: 1px solid #d8e6df;
     padding-bottom: 2mm;
     font-size: 14pt;
@@ -310,13 +313,13 @@
   .print-content table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 10.5pt;
+    font-size: 9pt;
   }
 
   .print-content th,
   .print-content td {
     border: 1px solid #d8e6df;
-    padding: 3.5mm;
+    padding: 2mm 2.5mm;
     text-align: left;
   }
 
