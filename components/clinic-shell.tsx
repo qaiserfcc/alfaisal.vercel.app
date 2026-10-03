@@ -2,13 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ClipboardList, LayoutDashboard, Pill, Stethoscope, Users } from 'lucide-react'
+import { ClipboardList, LayoutDashboard, Pill, Stethoscope, Users, LibraryBig } from 'lucide-react'
 
 const items = [
   { href: '/', label: 'Overview', icon: LayoutDashboard },
   { href: '/patients', label: 'Patients', icon: Users },
   { href: '/checkups', label: 'Checkups', icon: ClipboardList },
   { href: '/prescriptions', label: 'Prescriptions', icon: Pill },
+  { href: '/medicines', label: 'Medicine library', icon: LibraryBig },
 ]
 
 export function ClinicShell({ children, title, description, action }: { children: React.ReactNode; title: string; description: string; action?: React.ReactNode }) {
