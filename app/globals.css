@@ -188,7 +188,7 @@
     min-height: 297mm;
     width: 210mm;
     box-sizing: border-box;
-    padding: 9mm 12mm 8mm;
+    padding: 9mm 12mm 7mm;
     flex-direction: column;
     color: #263b35;
     background: #fffefb;
@@ -327,14 +327,39 @@
     padding-top: 4mm;
   }
 
-  .print-content h2 {
-    margin: 0 0 1.5mm;
-    border-bottom: 0.35mm solid #d8e5df;
-    padding-bottom: 1.5mm;
+  .print-content h2,
+  .print-rx-title {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    margin: 0 0 2.5mm;
+    color: #a6533a;
     font-family: Arial, sans-serif;
-    font-size: 11pt;
-    letter-spacing: 0.04em;
+    font-size: 10pt;
+    font-weight: 800;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+  }
+
+  .print-content h2::after,
+  .print-rx-title::after {
+    content: "";
+    height: 0.35mm;
+    flex: 1;
+    background: linear-gradient(90deg, #c7866e, #d8e5df 72%, transparent);
+  }
+
+  .print-rx-title {
+    margin-bottom: 2mm;
+    font-size: 15pt;
+    letter-spacing: 0.02em;
+  }
+
+  .print-rx-title::before {
+    content: "";
+    width: 1mm;
+    height: 5mm;
+    background: #b76545;
   }
 
   .print-diagnosis {
@@ -345,6 +370,37 @@
     margin: 0;
     font-size: 9.5pt;
     white-space: nowrap;
+  }
+
+  .print-rx {
+    margin-top: 5mm;
+    padding: 4mm 4mm 2mm;
+    border: 0.35mm solid #d8e5df;
+    border-radius: 2mm;
+    background: #fff;
+  }
+
+  .print-medicine {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: 3mm;
+    padding: 2.8mm 1mm;
+    border-bottom: 0.25mm solid #e1eae5;
+    font-family: Arial, sans-serif;
+    font-size: 8.5pt;
+  }
+
+  .print-medicine:last-child {
+    border-bottom: 0;
+  }
+
+  .print-medicine strong {
+    color: #315247;
+  }
+
+  .print-medicine span {
+    color: #52645d;
   }
 
   .print-content table {
@@ -371,11 +427,25 @@
   }
 
   .print-footer {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    margin-top: auto;
     border-top: 0.7mm solid #b76545;
     padding-top: 3mm;
     color: #52645d;
     font-family: Arial, sans-serif;
     font-size: 8.5pt;
     font-weight: 700;
+  }
+
+  .print-footer::before {
+    content: "";
+    width: 2mm;
+    height: 2mm;
+    margin-right: 2mm;
+    border-radius: 50%;
+    background: #b76545;
+    box-shadow: 91mm 0 0 #b76545;
   }
 }
