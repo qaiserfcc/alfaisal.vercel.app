@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { ClipboardList, LayoutDashboard, Pill, Stethoscope, Users, LibraryBig } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { ClipboardList, LayoutDashboard, Pill, Stethoscope, Users, LibraryBig, LogOut } from 'lucide-react'
+import { useSession, signOut } from '@/lib/auth-client'
 
 const items = [
   { href: '/', label: 'Overview', icon: LayoutDashboard },
@@ -14,6 +15,10 @@ const items = [
 
 export function ClinicShell({ children, title, description, action }: { children: React.ReactNode; title: string; description: string; action?: React.ReactNode }) {
   const pathname = usePathname()
+  const router = useRouter()
+  const { data: session, isPending } = useSession()
+  if (isPending) return <div className="flex min-h-screen items-center justify-center bg-[#f6f8f7] text-sm text-[#81918d]">Checking secure session…</div>
+  if (!session?.user) { router.replace('/sign-in'); return <div className="flex min-h-screen items-center justify-center bg-[#f6f8f7] text-sm text-[#81918d]">Redirecting to secure sign in…</div> }
   return <div className="min-h-screen bg-[#f6f8f7] text-[#183b37]">
     <aside className="fixed inset-y-0 left-0 hidden w-[248px] flex-col border-r border-[#e5ebe8] bg-white px-5 py-6 lg:flex">
       <Link href="/" className="mb-11 flex items-center gap-3 px-2"><span className="flex size-10 items-center justify-center rounded-xl bg-[#d9f4e8] text-[#13795b]"><Stethoscope /></span><span><span className="block text-[17px] font-bold">MediNotes</span><span className="block text-[11px] text-[#81918d]">CLINIC WORKSPACE</span></span></Link>
