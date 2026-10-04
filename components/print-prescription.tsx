@@ -15,9 +15,9 @@ export function PrintPrescription({ item }: { item: Prescription }) {
     <div className="print-clinical-layout">
       <aside className="print-clinical-sidebar" aria-label="Clinical summary">
         <section className="print-clinical-section"><h2>DX</h2><p>{item.diagnosis || 'Not recorded'}</p></section>
-        <section className="print-clinical-section"><h2>Allergies</h2><p>Not recorded</p></section>
-        <section className="print-clinical-section"><h2>Risk factors</h2><p>Not recorded</p></section>
-        <section className="print-clinical-section"><h2>Investigation</h2><p>Not recorded</p></section>
+        <section className="print-clinical-section"><h2>Allergies</h2><p>{item.allergies || 'Not recorded'}</p></section>
+        <section className="print-clinical-section"><h2>Risk factors</h2><p>{item.risk_factors || 'Not recorded'}</p></section>
+        <section className="print-clinical-section"><h2>Investigation</h2><p>{item.investigation || 'Not recorded'}</p></section>
       </aside>
       <main className="print-rx" aria-label="Prescription medicines"><div className="print-rx-title">Rx</div>{item.medicines.map((medicine, index) => <div className="print-medicine" key={`${medicine.name}-${index}`}><strong>{index + 1}. {medicine.name}</strong><span>{medicine.dosage || '—'}</span><span>{medicine.frequency || '—'}</span><span>{medicine.duration || '—'}</span></div>)}</main>
     </div>
