@@ -372,11 +372,58 @@
     white-space: nowrap;
   }
 
-  .print-rx {
+  .print-clinical-layout {
+    display: grid;
+    grid-template-columns: 25% minmax(0, 1fr);
+    flex: 1;
+    min-height: 0;
     margin-top: 5mm;
-    padding: 4mm 4mm 2mm;
-    border: 0.35mm solid #d8e5df;
-    border-radius: 2mm;
+    border-top: 0.35mm solid #d8e5df;
+    border-bottom: 0.35mm solid #d8e5df;
+  }
+
+  .print-clinical-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-right: 0.45mm solid #b76545;
+    padding: 3mm 4mm 3mm 0;
+  }
+
+  .print-clinical-section {
+    flex: 1;
+    min-height: 0;
+    padding: 2.5mm 0;
+    border-bottom: 0.25mm solid #d8e5df;
+  }
+
+  .print-clinical-section:last-child {
+    border-bottom: 0;
+  }
+
+  .print-clinical-section h2 {
+    margin: 0 0 1.5mm;
+    color: #a6533a;
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .print-clinical-section p {
+    margin: 0;
+    color: #52645d;
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .print-rx {
+    min-width: 0;
+    margin: 0;
+    padding: 4mm 0 2mm 5mm;
     background: #fff;
   }
 
